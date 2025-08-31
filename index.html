@@ -107,9 +107,20 @@
     <!-- Achievements & Certifications -->
     <section aria-labelledby="certs-title" style="margin-top:20px;">
       <h2 id="certs-title" class="section-title">Achievements & Certifications</h2>
-      <div id="certGrid" class="grid">
-        <!-- Your certificate cards will go here -->
+      <p class="section-sub">Use the search box to filter by title, issuer, year, or technology.</p>
+      <div class="controls">
+        <div class="search">
+          <input id="search" type="search" placeholder="Search: e.g., AWS, Java, 2024, Docker" aria-label="Search certificates" />
+        </div>
       </div>
+
+      <div id="certGrid" class="grid">
+        <!-- Add your certificate cards here -->
+      </div>
+      <p class="section-sub" style="margin-top:14px;">
+        ➕ To add a new certificate: duplicate one <em>.card</em> block, place your image in <code>certificates/</code>, 
+        and update <strong>title / issuer / date / tags</strong>. Keep filenames simple (e.g., <code>aws-cloud-2024.png</code>).
+      </p>
     </section>
   </main>
 
@@ -121,20 +132,18 @@
     // Simple search/filter
     const input = document.getElementById('search');
     const cards = Array.from(document.querySelectorAll('#certGrid .card'));
-    if (input) {
-      input.addEventListener('input', () => {
-        const q = input.value.toLowerCase().trim();
-        cards.forEach(card => {
-          const hay = [
-            card.dataset.title || '',
-            card.dataset.issuer || '',
-            card.dataset.date || '',
-            card.dataset.tags || ''
-          ].join(' ').toLowerCase();
-          card.style.display = hay.includes(q) ? '' : 'none';
-        });
+    input.addEventListener('input', () => {
+      const q = input.value.toLowerCase().trim();
+      cards.forEach(card => {
+        const hay = [
+          card.dataset.title || '',
+          card.dataset.issuer || '',
+          card.dataset.date || '',
+          card.dataset.tags || ''
+        ].join(' ').toLowerCase();
+        card.style.display = hay.includes(q) ? '' : 'none';
       });
-    }
+    });
   </script>
 </body>
 </html>
